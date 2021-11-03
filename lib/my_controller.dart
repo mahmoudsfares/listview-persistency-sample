@@ -1,18 +1,52 @@
-
 import 'package:get/get.dart';
 
 class MyController extends GetxController {
 
-  List data = ['kite', 'keyboard', 'button', 'two', 'singer'];
-  List<RxBool> itemsCheckStatus = [];
+  List itemsNames = [
+    'kite',
+    'keyboard',
+    'button',
+    'two',
+    'singer',
+    'burger',
+    'rifle',
+    'romania',
+    'mother',
+    'pocket knife',
+    'matt damon',
+    'cafe',
+    'ball',
+    'apostrophe',
+    'hair',
+    'led',
+    'song',
+    'sea',
+    'self',
+    'car',
+    'iron',
+    'voice',
+    'thirty eight',
+    'dress',
+    'microphone',
+    'network',
+    'book',
+    'finger',
+    'tomatoes',
+    'back',
+    'bracket',
+    'bread',
+    'ant',
+    'ceiling',
+    'people',
+    'thursday'
+  ];
 
-  void initalizeCheckStatus() {
-    for(int i = 0; i < data.length; i++){
-      itemsCheckStatus.add(false.obs);
-    }
-  }
+  RxList<int> checkedItemsIndexes = (List<int>.empty(growable: true)).obs;
 
-  void changeCheckStatus(int index){
-    itemsCheckStatus[index].value = !itemsCheckStatus[index].value;
+  void changeCheckStatus(int index) {
+    if (checkedItemsIndexes.contains(index))
+      checkedItemsIndexes.remove(index);
+    else
+      checkedItemsIndexes.add(index);
   }
 }

@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class MyListItem extends StatelessWidget {
 
-  String itemName;
-  int itemIndex;
-  Function onItemChecked;
-  RxBool itemCheckStatus;
+  final String itemName;
+  final int itemIndex;
+  final Function onCheckStateChanged;
+  final bool isItemChecked;
 
-  MyListItem(this.itemName, this.itemIndex, this.onItemChecked, this.itemCheckStatus);
+  const MyListItem(this.itemName, this.itemIndex, this.onCheckStateChanged, this.isItemChecked);
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +20,23 @@ class MyListItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                IconButton(onPressed: (){
-                  onItemChecked(itemIndex);
-                }, icon: Obx(() {
-                  if(itemCheckStatus.value)
-                    return Icon(Icons.check_box);
-                  else
-                    return Icon(Icons.check_box_outline_blank);
-                }))
+                IconButton(
+                    onPressed: () {
+                      onCheckStateChanged(itemIndex);
+                    },
+                    icon: _bindIconToCheckStatus())
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  Icon _bindIconToCheckStatus() {
+    if (isItemChecked)
+      return Icon(Icons.check_box);
+    else
+      return Icon(Icons.check_box_outline_blank);
   }
 }
