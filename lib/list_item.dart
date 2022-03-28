@@ -11,31 +11,19 @@ class MyListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Row(
-        children: [
-          Text(itemName),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      onCheckStateChanged(itemIndex);
-                    },
-                    icon: _bindIconToCheckStatus())
-              ],
+    return GestureDetector(
+      onTap: () => onCheckStateChanged(itemIndex),
+      child: Card(
+        color: isItemChecked ? Colors.blue : Colors.white,
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(itemName),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
-  }
-
-  Icon _bindIconToCheckStatus() {
-    if (isItemChecked)
-      return Icon(Icons.check_box);
-    else
-      return Icon(Icons.check_box_outline_blank);
   }
 }

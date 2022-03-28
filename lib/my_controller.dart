@@ -41,12 +41,9 @@ class MyController extends GetxController {
     'thursday'
   ];
 
-  RxList<int> checkedItemsIndexes = (List<int>.empty(growable: true)).obs;
+  RxInt checkedItemIndex = (-1).obs;
 
   void changeCheckStatus(int index) {
-    if (checkedItemsIndexes.contains(index))
-      checkedItemsIndexes.remove(index);
-    else
-      checkedItemsIndexes.add(index);
+    checkedItemIndex.value = index;
   }
 }
