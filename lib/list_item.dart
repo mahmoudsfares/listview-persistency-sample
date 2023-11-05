@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:listview_persistency_sample/thing.dart';
 
 class MyListItem extends StatelessWidget {
 
-  final String itemName;
+  final Thing thing;
   final int itemIndex;
   final Function onCheckStateChanged;
   final bool isItemChecked;
 
-  const MyListItem(this.itemName, this.itemIndex, this.onCheckStateChanged, this.isItemChecked);
+  const MyListItem(this.thing, this.itemIndex, this.onCheckStateChanged, this.isItemChecked);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Row(
         children: [
-          Text(itemName),
+          Text(thing.name),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,

@@ -8,25 +8,36 @@ void main() {
 }
 
 class MyHomePage extends GetView<MyController> {
-
   @override
   Widget build(BuildContext context) {
-
     Get.lazyPut(() => MyController());
 
     return MaterialApp(
       home: Scaffold(
-        body: ListView.builder(
-            itemCount: controller.itemsNames.length,
-            itemBuilder: (context, index) {
-              return Obx(
-                () => MyListItem(
-                    controller.itemsNames[index],
-                    index,
-                    (index) => controller.changeCheckStatus(index),
-                    controller.checkedItemsIndexes.value.contains(index)),
-              );
-            }),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                  itemCount: controller.things.length,
+                  itemBuilder: (context, index) {
+                    return Obx(
+                      () => MyListItem(
+                        controller.things[index],
+                        controller.things[index].id,
+                        (index) => controller.changeCheckStatus(index),
+                        controller.checkedItemsIndexes.value
+                            .contains(controller.things[index].id),
+                      ),
+                    );
+                  }),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  print(controller.checkedItemsIndexes.value);
+                },
+                child: const Text("print selected indexes"))
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:listview_persistency_sample/thing.dart';
 
 class MyController extends GetxController {
 
@@ -39,6 +40,15 @@ class MyController extends GetxController {
     'ceiling',
     'people',
     'thursday'
+  ];
+
+  List<Thing> things = [
+    Thing(24, 'bracket'),
+    Thing(103, 'ceiling'),
+    Thing(-1, 'people'),
+    Thing(7, 'thursday'),
+    Thing(130, 'back'),
+    Thing(10, 'bread'),
   ];
 
   RxList<int> checkedItemsIndexes = (List<int>.empty(growable: true)).obs;
