@@ -41,13 +41,17 @@ class MyController {
     'thursday'
   ];
 
-  ValueNotifier<List<int>> checkedItemsIndexes = ValueNotifier(List<int>.empty(growable: true));
+  ValueNotifier<List<int>> checkedItemsIndexes = ValueNotifier(List<int>.empty(growable: false));
 
   void changeCheckStatus(int index) {
-    if (checkedItemsIndexes.value.contains(index)) {
-      checkedItemsIndexes.value.remove(index);
+    // copy of the already existing list so the value of the notifier can be changed and trigger the rebuild
+    // mere addition or removal of an item will not change the list object, then the rebuild won't trigger
+    final List<int> tempList = List.of(checkedItemsIndexes.value);
+    if (tempList.contains(index)) {
+      tempList.remove(index);
     } else {
-      checkedItemsIndexes.value.add(index);
+      tempList.add(index);
     }
+    checkedItemsIndexes.value = tempList;
   }
 }
