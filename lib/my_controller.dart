@@ -1,6 +1,6 @@
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
-class MyController extends GetxController {
+class MyController {
 
   List itemsNames = [
     'kite',
@@ -41,9 +41,13 @@ class MyController extends GetxController {
     'thursday'
   ];
 
-  RxInt checkedItemIndex = (-1).obs;
+  ValueNotifier<List<int>> checkedItemsIndexes = ValueNotifier(List<int>.empty(growable: true));
 
   void changeCheckStatus(int index) {
-    checkedItemIndex.value = index;
+    if (checkedItemsIndexes.value.contains(index)) {
+      checkedItemsIndexes.value.remove(index);
+    } else {
+      checkedItemsIndexes.value.add(index);
+    }
   }
 }
