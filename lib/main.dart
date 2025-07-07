@@ -17,12 +17,12 @@ class MyHomePage extends StatelessWidget {
           itemCount: controller.itemsNames.length,
           itemBuilder: (context, index) {
             return ValueListenableBuilder(
-              valueListenable: controller.checkedItemsIndexes,
+              valueListenable: controller.checkedItemIndex,
               builder: (BuildContext context, value, Widget? child) => MyListItem(
                 controller.itemsNames[index],
                 index,
                 (index) => controller.changeCheckStatus(index),
-                controller.checkedItemsIndexes.value.contains(index),
+                controller.checkedItemIndex.value == index,
               ),
             );
           },

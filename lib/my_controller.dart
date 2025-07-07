@@ -41,13 +41,9 @@ class MyController {
     'thursday'
   ];
 
-  ValueNotifier<List<int>> checkedItemsIndexes = ValueNotifier(List<int>.empty(growable: true));
+  ValueNotifier<int> checkedItemIndex = ValueNotifier(-1);
 
   void changeCheckStatus(int index) {
-    if (checkedItemsIndexes.value.contains(index)) {
-      checkedItemsIndexes.value.remove(index);
-    } else {
-      checkedItemsIndexes.value.add(index);
-    }
+    checkedItemIndex.value = index;
   }
 }
